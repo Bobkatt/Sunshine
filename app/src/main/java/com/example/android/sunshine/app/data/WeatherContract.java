@@ -21,11 +21,13 @@ import android.text.format.Time;
 /**
  * Defines table and column names for the weather database.
  */
-public class WeatherContract {
+public class WeatherContract
+{
 
     // To make it easy to query for the exact date, we normalize all dates that go into
     // the database to the start of the the Julian day at UTC.
-    public static long normalizeDate(long startDate) {
+    public static long normalizeDate(long startDate)
+    {
         // normalize the start date to the beginning of the (UTC) day
         Time time = new Time();
         time.set(startDate);
@@ -38,13 +40,15 @@ public class WeatherContract {
         Students: This is where you will add the strings.  (Similar to what has been
         done for WeatherEntry)
      */
-    public static final class LocationEntry implements BaseColumns {
+    public static final class LocationEntry implements BaseColumns
+    {
         public static final String TABLE_NAME = "location";
 
     }
 
     /* Inner class that defines the table contents of the weather table */
-    public static final class WeatherEntry implements BaseColumns {
+    public static final class WeatherEntry implements BaseColumns
+    {
 
         public static final String TABLE_NAME = "weather";
 

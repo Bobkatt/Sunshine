@@ -17,12 +17,14 @@ package com.example.android.sunshine.app.data;
 
 import android.test.AndroidTestCase;
 
-public class TestDb extends AndroidTestCase {
+public class TestDb extends AndroidTestCase
+{
 
     public static final String LOG_TAG = TestDb.class.getSimpleName();
 
     // Since we want each test to start with a clean slate
-    void deleteTheDatabase() {
+    void deleteTheDatabase()
+    {
         mContext.deleteDatabase(WeatherDbHelper.DATABASE_NAME);
     }
 
@@ -30,7 +32,8 @@ public class TestDb extends AndroidTestCase {
         This function gets called before each test is executed to delete the database.  This makes
         sure that we always have a clean test.
      */
-    public void setUp() {
+    public void setUp()
+    {
         deleteTheDatabase();
     }
 
@@ -106,7 +109,8 @@ public class TestDb extends AndroidTestCase {
         where you can uncomment out the "createNorthPoleLocationValues" function.  You can
         also make use of the ValidateCurrentRecord function from within TestUtilities.
     */
-    public void testLocationTable() {
+    public void testLocationTable()
+    {
         // First step: Get reference to writable database
 
         // Create ContentValues of what you want to insert
@@ -132,7 +136,8 @@ public class TestDb extends AndroidTestCase {
         where you can use the "createWeatherValues" function.  You can
         also make use of the validateCurrentRecord function from within TestUtilities.
      */
-    public void testWeatherTable() {
+    public void testWeatherTable()
+    {
         // First insert the location, and then use the locationRowId to insert
         // the weather. Make sure to cover as many failure cases as you can.
 
@@ -165,7 +170,8 @@ public class TestDb extends AndroidTestCase {
         code from testLocationTable to here so that you can call this code from both
         testWeatherTable and testLocationTable.
      */
-    public long insertLocation() {
+    public long insertLocation()
+    {
         return -1L;
     }
 }
