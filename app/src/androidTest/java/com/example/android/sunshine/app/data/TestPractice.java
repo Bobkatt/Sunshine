@@ -24,7 +24,8 @@ public class TestPractice extends AndroidTestCase
         assertTrue("Y should be true", d > a);
         assertFalse("Z should be false", a == b);
 
-        if (b > d) {
+        if (b > d)
+        {
             fail("XX should never happen");
         }
     }
