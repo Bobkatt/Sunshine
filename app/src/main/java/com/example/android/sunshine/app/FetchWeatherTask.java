@@ -361,7 +361,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         String format = "json";
         String units = "metric";
-        int numDays = 14;
+        int numDays = 7;
 
         try {
             // Construct the URL for the OpenWeatherMap query
