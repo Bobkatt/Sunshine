@@ -48,17 +48,11 @@ public class WeatherProvider extends ContentProvider
                         "." + WeatherContract.LocationEntry._ID);
     }
 
-    private static final String sLocationSettingSelection = WeatherContract
-            .LocationEntry.TABLE_NAME+"." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
-            + " = ? ";
+    private static final String sLocationSettingSelection = WeatherContract.LocationEntry.TABLE_NAME+"." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? ";
     //location.location_setting = ? AND date >= ?
-    private static final String sLocationSettingWithStartDateSelection = WeatherContract
-            .LocationEntry.TABLE_NAME+"." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
-            + " = ? AND " + WeatherContract.WeatherEntry.COLUMN_DATE + " >= ? ";
+    private static final String sLocationSettingWithStartDateSelection = WeatherContract.LocationEntry.TABLE_NAME+"." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " + WeatherContract.WeatherEntry.COLUMN_DATE + " >= ? ";
     //location.location_setting = ? AND date = ?
-    private static final String sLocationSettingAndDaySelection = WeatherContract
-            .LocationEntry.TABLE_NAME +"." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING
-            + " = ? AND " +       WeatherContract.WeatherEntry.COLUMN_DATE + " = ? ";
+    private static final String sLocationSettingAndDaySelection = WeatherContract.LocationEntry.TABLE_NAME +"." + WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING + " = ? AND " +       WeatherContract.WeatherEntry.COLUMN_DATE + " = ? ";
 
     private Cursor getWeatherByLocationSetting(Uri uri, String[] projection, String sortOrder)
     {
@@ -79,8 +73,7 @@ public class WeatherProvider extends ContentProvider
             selection = sLocationSettingWithStartDateSelection;
         }
 
-        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
-                projection, selection, selectionArgs, null, null, sortOrder);
+        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(), projection, selection, selectionArgs, null, null, sortOrder);
     }
 
     private Cursor getWeatherByLocationSettingAndDate(Uri uri, String[] projection, String sortOrder)
@@ -88,9 +81,7 @@ public class WeatherProvider extends ContentProvider
         String locationSetting = WeatherContract.WeatherEntry.getLocationSettingFromUri(uri);
         long date = WeatherContract.WeatherEntry.getDateFromUri(uri);
 
-        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(),
-                projection, sLocationSettingAndDaySelection, new String[]{locationSetting,
-                        Long.toString(date)}, null, null, sortOrder );
+        return sWeatherByLocationSettingQueryBuilder.query(mOpenHelper.getReadableDatabase(), projection, sLocationSettingAndDaySelection, new String[]{locationSetting, Long.toString(date)}, null, null, sortOrder );
     }
 
     static UriMatcher buildUriMatcher()
