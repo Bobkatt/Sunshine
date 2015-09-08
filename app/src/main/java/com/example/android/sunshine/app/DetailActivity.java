@@ -33,6 +33,7 @@ public class DetailActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.detail, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -44,6 +45,7 @@ public class DetailActivity extends AppCompatActivity
         }
         return super.onOptionsItemSelected(item);
     }
+
     public static class DetailFragment extends Fragment
     {
         private static final String LOG_TAG = DetailFragment.class.getSimpleName();
@@ -53,12 +55,14 @@ public class DetailActivity extends AppCompatActivity
         {
             setHasOptionsMenu(true);
         }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
             Intent intent = getActivity().getIntent();
-            if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT)) {
+            if (intent != null && intent.hasExtra(Intent.EXTRA_TEXT))
+            {
                 mForecastStr = intent.getStringExtra(Intent.EXTRA_TEXT);
             }
             if (null != mForecastStr)
@@ -68,6 +72,7 @@ public class DetailActivity extends AppCompatActivity
 
             return rootView;
         }
+
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
         {
@@ -83,6 +88,7 @@ public class DetailActivity extends AppCompatActivity
                 Log.d(LOG_TAG, "Share Action Provider is null?");
             }
         }
+
         private Intent createShareForecastIntent()
         {
             Intent shareIntent = new Intent(Intent.ACTION_SEND);

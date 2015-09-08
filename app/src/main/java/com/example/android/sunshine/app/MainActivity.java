@@ -1,10 +1,8 @@
 package com.example.android.sunshine.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +19,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.container, new ForecastFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.container,
+                    new ForecastFragment()).commit();
         }
     }
     @Override
@@ -79,7 +78,8 @@ public class MainActivity extends AppCompatActivity
     private void openPreferredLocationInMap()
     {
         String location = Utility.getPreferredLocation(this);
-        Uri geoLocation = Uri.parse("geo:0,0?").buildUpon().appendQueryParameter("q", location).build();
+        Uri geoLocation = Uri.parse("geo:0,0?").buildUpon()
+                .appendQueryParameter("q", location).build();
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
         if(intent.resolveActivity(getPackageManager()) != null)
