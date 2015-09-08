@@ -11,16 +11,20 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
 {
     private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private final String FORECASTFRAGMENT_TAG = "FFTAG";
+    private String mLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        Log.v(LOG_TAG, "in onCreate");
+        mLocation = Utility.getPreferredLocation(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null)
         {
-            getSupportFragmentManager().beginTransaction().add(R.id.container,
-                    new ForecastFragment()).commit();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new ForecastFragment(), FORECASTFRAGMENT_TAG)
+                    .commit();
         }
     }
     @Override
@@ -29,12 +33,7 @@ public class MainActivity extends AppCompatActivity
         Log.v(LOG_TAG, "in onStart");
         super.onStart();
     }
-    @Override
-    protected void onResume()
-    {
-        Log.v(LOG_TAG, "in onResume");
-        super.onResume();
-    }
+
     @Override
     protected void onPause()
     {
@@ -90,5 +89,22 @@ public class MainActivity extends AppCompatActivity
         {
             Log.d(LOG_TAG, "Couldn't call " + location + ", no receiving apps installed!");
         }
+    }
+
+    @Override
+    protected  void onResume()
+    {
+        super.onResume();
+        String location = Utility.getPreferredLocation( this );
+        if (location != null && !location.equals(mLocation))
+        {
+            ForecastFragment ff = (ForecastFragment)getSupportFragmentManager().findFragmentByTag(FORECASTFRAGMENT_TAG);
+            if ( null != ff )
+            {
+                ff.onLocationChanged();
+            }
+            mLocation = location;
+        }
+
     }
 }
