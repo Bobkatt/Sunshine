@@ -198,7 +198,7 @@ public class FetchWeatherTask extends AsyncTask<String, Void, Void>
         String forecastJsonStr = null;
         String format = "json";
         String units = "metric";
-        int numDays = 14;
+        int numDays = 7;
         try
         {
             final String FORECAST_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?";
