@@ -9,8 +9,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
-public class SettingsActivity extends PreferenceActivity
-        implements Preference.OnPreferenceChangeListener
+public class SettingsActivity extends PreferenceActivity implements Preference.OnPreferenceChangeListener
 {
     @Override
     public void onCreate(Bundle savedInstanceState)

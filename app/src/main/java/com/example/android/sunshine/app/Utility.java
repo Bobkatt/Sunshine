@@ -72,17 +72,22 @@ public class Utility
 
         // If the date we're building the String for is today's date, the format
         // is "Today, June 24"
-        if (julianDay == currentJulianDay) {
+        if (julianDay == currentJulianDay)
+        {
             String today = context.getString(R.string.today);
             int formatId = R.string.format_full_friendly_date;
             return String.format(context.getString(
                     formatId,
                     today,
                     getFormattedMonthDay(context, dateInMillis)));
-        } else if ( julianDay < currentJulianDay + 7 ) {
+        }
+        else if ( julianDay < currentJulianDay + 7 )
+        {
             // If the input date is less than a week in the future, just return the day name.
             return getDayName(context, dateInMillis);
-        } else {
+        }
+        else
+        {
             // Otherwise, use the form "Mon Jun 3"
             SimpleDateFormat shortenedDateFormat = new SimpleDateFormat("EEE MMM dd");
             return shortenedDateFormat.format(dateInMillis);
@@ -97,19 +102,24 @@ public class Utility
      * @param dateInMillis The date in milliseconds
      * @return
      */
-    public static String getDayName(Context context, long dateInMillis) {
+    public static String getDayName(Context context, long dateInMillis)
+    {
         // If the date is today, return the localized version of "Today" instead of the actual
         // day name.
-
         Time t = new Time();
         t.setToNow();
         int julianDay = Time.getJulianDay(dateInMillis, t.gmtoff);
         int currentJulianDay = Time.getJulianDay(System.currentTimeMillis(), t.gmtoff);
-        if (julianDay == currentJulianDay) {
+        if (julianDay == currentJulianDay)
+        {
             return context.getString(R.string.today);
-        } else if ( julianDay == currentJulianDay +1 ) {
+        }
+        else if ( julianDay == currentJulianDay +1 )
+        {
             return context.getString(R.string.tomorrow);
-        } else {
+        }
+        else
+        {
             Time time = new Time();
             time.setToNow();
             // Otherwise, the format is just the day of the week (e.g "Wednesday".
@@ -125,7 +135,8 @@ public class Utility
      *                in Utility.DATE_FORMAT
      * @return The day in the form of a string formatted "December 6"
      */
-    public static String getFormattedMonthDay(Context context, long dateInMillis ) {
+    public static String getFormattedMonthDay(Context context, long dateInMillis )
+    {
         Time time = new Time();
         time.setToNow();
         SimpleDateFormat dbDateFormat = new SimpleDateFormat(Utility.DATE_FORMAT);
