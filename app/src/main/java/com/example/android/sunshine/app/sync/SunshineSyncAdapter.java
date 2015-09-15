@@ -49,7 +49,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter
     public final String LOG_TAG = SunshineSyncAdapter.class.getSimpleName();
     // Interval at which to sync with the weather, in seconds.
     // 60 seconds (1 minute) * 180 = 3 hours
-    public static final int SYNC_INTERVAL = 30;
+    public static final int SYNC_INTERVAL = 60 * 180;
     public static final int SYNC_FLEXTIME = SYNC_INTERVAL/3;
     private static final long DAY_IN_MILLIS = 1000 * 60 * 60 * 24;
     private static final int WEATHER_NOTIFICATION_ID = 3004;
@@ -86,7 +86,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter
 
         String format = "json";
         String units = "metric";
-        int numDays = 21;
+        int numDays = 14;
 
         try
         {
@@ -163,7 +163,9 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter
                 try
                 {
                     reader.close();
-                } catch (final IOException e) {
+                }
+                catch (final IOException e)
+                {
                     Log.e(LOG_TAG, "Error closing stream", e);
                 }
             }
@@ -275,8 +277,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter
 
                 // Description is in a child array called "weather", which is 1 element long.
                 // That element also contains a weather code.
-                JSONObject weatherObject =
-                        dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
+                JSONObject weatherObject = dayForecast.getJSONArray(OWM_WEATHER).getJSONObject(0);
                 description = weatherObject.getString(OWM_DESCRIPTION);
                 weatherId = weatherObject.getInt(OWM_WEATHER_ID);
 
@@ -315,9 +316,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter
                         new String[] {Long.toString(dayTime.setJulianDay(julianStartDay-1))});
                 notifyWeather();
             }
-
             Log.d(LOG_TAG, "Sync Complete. " + cVVector.size() + " Inserted");
-
         }
         catch (JSONException e)
         {
@@ -518,6 +517,7 @@ public class SunshineSyncAdapter extends AbstractThreadedSyncAdapter
              * then call ContentResolver.setIsSyncable(account, AUTHORITY, 1)
              * here.
              */
+            onAccountCreated(newAccount, context);
         }
         return newAccount;
     }
